@@ -1,51 +1,43 @@
 // ==UserScript==
 // @name         forvo
-// @version      0.2
+// @version      0.1
 // @description  Auto pronounce as soon as the forvo page loads .
 // @author       z0xyz
 // @match        https://*forvo.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @run-at       document-end
+// @namespace https://greasyfork.org/users/813029
 // ==/UserScript==
-
-function play_first_sound(first_number,second_number){
-    document.getElementsByClassName("word-play-list-icon-size-l").item(first_number).getElementsByClassName("play").item(second_number).click()
-}
-
-function play_additional_sound(first_number,second_number){
-    document.getElementsByClassName("word-play-list-icon-size-l").item(first_number).childNodes.item(second_number).firstElementChild.click()
-}
-
+ 
 try {
     try {
-        play_first_sound(0,0)
+        document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").item(0).click()
     }
     catch {
-        play_additional_sound(1,1)
+        document.getElementsByClassName("word-play-list-icon-size-l").item(1).childNodes.item(1).firstElementChild.click()
     }
 }catch {
     document.getElementById("navLangItem-en").firstElementChild.click()
 }
-
+ 
 function keypressCheck(keypressEvent){
-    keypressEvent.preventDefault()
-    switch (keypressEvent.code) {
-        case ("Space"):
-            play_first_sound(0,0)
+    switch (keypressEvent.key) {
+        case ("R"):
+            document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").item(0).click()
             break
-        case ("Digit1"):
-            play_additional_sound(1,1)
+        case ("!"):
+            document.getElementsByClassName("word-play-list-icon-size-l").item(1).childNodes.item(1).firstElementChild.click()
             break
-        case ("Digit2"):
-            play_additional_sound(1,3)
+        case ("@"):
+            document.getElementsByClassName("word-play-list-icon-size-l").item(1).childNodes.item(3).firstElementChild.click()
             break
-        case ("Digit3"):
-            play_additional_sound(1,5)
+        case ("#"):
+            document.getElementsByClassName("word-play-list-icon-size-l").item(1).childNodes.item(5).firstElementChild.click()
             break
-        case ("Digit4"):
-            play_additional_sound(1,7)
+        case ("$"):
+            document.getElementsByClassName("word-play-list-icon-size-l").item(1).childNodes.item(7).firstElementChild.click()
             break
     }
 }
-
+ 
 window.addEventListener("keypress",keypressCheck,false)
