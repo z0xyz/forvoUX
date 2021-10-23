@@ -29,8 +29,8 @@ try {
 }
  
 function keypressCheck(keypressEvent){
-    keypressEvent.returnValue = false;
     if (document.activeElement != document.getElementById("word_search_header")) {
+        keypressEvent.returnValue = false;
         switch (keypressEvent.key) {
             case (" "):
                 play_first_sound(0,0)
@@ -49,7 +49,6 @@ function keypressCheck(keypressEvent){
                 break
         }
     }
-    keypressEvent.returnValue = true;
 }
  
 window.addEventListener("keydown",keypressCheck,false)
