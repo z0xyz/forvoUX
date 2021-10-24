@@ -10,3 +10,6 @@ A userscript that enhances the usability of the pronunciation website forvo.com 
 
 *   pressing \<space\> will play the primary pronunciation .
 *   pressing \<s-1\> ,\<s-2\> ,\<s-3\> ,\<s-4\> will play the consecutive variations .
+
+**TODO**
+[]  Enable a more convenient , encompassing way to choose which recording to listen to .
