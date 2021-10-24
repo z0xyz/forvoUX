@@ -1,10 +1,10 @@
 A is a userscript that enhances the usability of the pronunciation website forvo.com .
 
-Installation
+**Installation**
 
-    -install a user script manager for your respective browser .
-    -initialize a new userscript .
-    -paste the current script within it .
+*   install a user script manager for your respective browser .
+*   initialize a new userscript .
+*   paste the current script within it .
 
 **Usage**
 
