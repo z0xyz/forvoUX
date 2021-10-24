@@ -6,7 +6,7 @@ Installation
     -initialize a new userscript .
     -paste the current script within it .
 
-*****Usage**
-    
+**Usage**
+
 *   pressing <space> will play the primary pronunciation .
-*   pressing <S-1> , <s-2> , <s-3> , <s-4> will play the consecutive variaations .
+*   pressing <S-1> , <s-2> , <s-3> , <s-4> will play the consecutive variations .
