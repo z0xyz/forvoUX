@@ -31,20 +31,20 @@ try {
 function keypressCheck(keypressEvent){
     if (document.activeElement != document.getElementById("word_search_header")) {
         keypressEvent.returnValue = false;
-        switch (keypressEvent.key) {
-            case (" "):
+        switch (keypressEvent.code) {
+            case ("Space"):
                 play_first_sound(0,0)
                 break
-            case ("!"):
+            case ("Digit1"):
                 play_additional_sound(1,1)
                 break
-            case ("@"):
+            case ("Digit2"):
                 play_additional_sound(1,3)
                 break
-            case ("#"):
+            case ("Digit3"):
                 play_additional_sound(1,5)
                 break
-            case ("$"):
+            case ("Digit4"):
                 play_additional_sound(1,7)
                 break
         }
