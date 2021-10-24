@@ -1,4 +1,4 @@
-A is a userscript that enhances the usability of the pronunciation website forvo.com .
+A userscript that enhances the usability of the pronunciation website forvo.com .
 
 **Installation**
 
