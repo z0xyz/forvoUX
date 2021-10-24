@@ -2,7 +2,7 @@ A userscript that enhances the usability of the pronunciation website forvo.com 
 
 **Installation**
 
-1.   install a user script manager for your respective browser .
+1.   install a userscript manager for your respective browser .
 2.   initialize a new userscript .
 3.   paste the current script within it .
 
