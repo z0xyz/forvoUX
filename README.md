@@ -8,5 +8,5 @@ A is a userscript that enhances the usability of the pronunciation website forvo
 
 **Usage**
 
-*   pressing <space> will play the primary pronunciation .
-*   pressing <S-1> , <s-2> , <s-3> , <s-4> will play the consecutive variations .
+*   pressing \<space\> will play the primary pronunciation .
+*   pressing \<s-1\> ,\<s-2\> ,\<s-3\> ,\<s-4\> will play the consecutive variations .
