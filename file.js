@@ -9,7 +9,7 @@
 // @namespace https://greasyfork.org/users/813029
 // ==/UserScript==
  
-function play_first_sound(first_number,second_number){
+function play_initial_sound(first_number,second_number){
     document.getElementsByClassName("word-play-list-icon-size-l").item(first_number).getElementsByClassName("play").item(second_number).click()
 }
  
@@ -33,7 +33,7 @@ function keypressCheck(keypressEvent){
         keypressEvent.returnValue = false;
         switch (keypressEvent.code) {
             case ("Space"):
-                play_first_sound(0,0)
+                play_initial_sound(0,0)
                 break
             case ("Digit1"):
                 play_additional_sound(1,1)
