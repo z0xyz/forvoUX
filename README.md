@@ -14,3 +14,4 @@ A userscript that enhances the usability of the pronunciation website forvo.com 
 **TODO**
 - [ ]  Enable a more convenient , encompassing way to choose which recording to listen to .
 - [ ]  Any possible code refinements .
+    - [ ] Refine the cases within the function body with potentially a convenient formula for numbering .
