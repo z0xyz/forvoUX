@@ -1,3 +1,4 @@
+
 // ==UserScript==
 // @name         forvo
 // @version      0.3
@@ -8,15 +9,15 @@
 // @run-at       document-end
 // @namespace https://greasyfork.org/users/813029
 // ==/UserScript==
- 
+
 function play_initial_sound(first_number,second_number){
     document.getElementsByClassName("word-play-list-icon-size-l").item(first_number).getElementsByClassName("play").item(second_number).click()
 }
- 
+
 function play_additional_sound(first_number,second_number){
     document.getElementsByClassName("word-play-list-icon-size-l").item(first_number).childNodes.item(second_number).firstElementChild.click()
 }
- 
+
 try {
     try {
         play_initial_sound(0,0)
@@ -27,7 +28,7 @@ try {
 }catch {
     document.getElementById("navLangItem-en").firstElementChild.click()
 }
- 
+
 function keypressCheck(keypressEvent){
     if (document.activeElement != document.getElementById("word_search_header")) {
         keypressEvent.returnValue = false;
@@ -48,7 +49,15 @@ function keypressCheck(keypressEvent){
                 play_additional_sound(1,7)
                 break
         }
+        (function searchBoxFunctionality(){
+            if (keypressEvent.shiftKey && keypressEvent.code == "KeyS") {
+                document.getElementById("word_search_header").value = ""
+                document.getElementById("word_search_header").focus()
+            }else if (keypressEvent.code == "KeyS"){
+                document.getElementById("word_search_header").focus()
+            }
+        }())
     }
 }
- 
+
 window.addEventListener("keydown",keypressCheck,false)
