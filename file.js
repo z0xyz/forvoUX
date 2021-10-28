@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name         forvo
 // @version      0.3
