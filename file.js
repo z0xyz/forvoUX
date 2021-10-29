@@ -16,7 +16,7 @@ let new_placement = 0
 
 function highlight_item(movement_value){
     new_placement += movement_value
-    if ( new_placement >= 0 && new_placement <= recordings_number ) {
+    if ( new_placement >= 0 && new_placement < recordings_number ) {
         console.log(new_placement)
         previous_placement = new_placement - movement_value
         document.getElementsByClassName("play").item(previous_placement).style = ""
@@ -27,7 +27,7 @@ function highlight_item(movement_value){
 }
 
 function play_initial_sound(){
-    document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByTagName("li").item(0).getElementsByClassName("play").item(0).click()
+    document.getElementsByClassName("play").item(new_placement).click()
 }
 
 function play_additional_sound(recordingNumber){
@@ -60,36 +60,24 @@ function keypressCheck(keypressEvent){
             case ("Space"):
                 play_initial_sound()
                 break
-            case ("Digit1"):
-                play_additional_sound(0)
-                break
-            case ("Digit2"):
-                play_additional_sound(1)
-                break
-            case ("Digit3"):
-                play_additional_sound(2)
-                break
-            case ("Digit4"):
-                play_additional_sound(3)
-                break
-            case ("ArrowUp"):
+            case ("KeyW"):
                 highlight_item(-2)
                 break
-            case ("ArrowDown"):
+            case ("KeyS"):
                 highlight_item(2)
                 break
-            case ("ArrowRight"):
+            case ("KeyD"):
                 highlight_item(1)
                 break
-            case ("ArrowLeft"):
+            case ("KeyA"):
                 highlight_item(-1)
                 break
         }
         (function searchBoxFunctionality(){
-            if (keypressEvent.shiftKey && keypressEvent.code == "KeyS") {
+            if (keypressEvent.shiftKey && keypressEvent.code == "KeyQ") {
                 document.getElementById("word_search_header").value = ""
                 document.getElementById("word_search_header").focus()
-            }else if (keypressEvent.code == "KeyS"){
+            }else if (keypressEvent.code == "KeyQ"){
                 document.getElementById("word_search_header").focus()
             }
         }())
