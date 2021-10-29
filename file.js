@@ -11,12 +11,15 @@
 
 let recordings_number = document.getElementsByClassName("play").length
 let initial_placement = 0
+let previous_placement = 0
 let new_placement = 0
 
 function highlight_item(movement_value){
     new_placement += movement_value
     if ( new_placement >= 0 && new_placement <= recordings_number ) {
         console.log(new_placement)
+        previous_placement = new_placement - movement_value
+        document.getElementsByClassName("play").item(previous_placement).style = ""
         document.getElementsByClassName("play").item(new_placement).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8"
     }else {
         new_placement -= movement_value
