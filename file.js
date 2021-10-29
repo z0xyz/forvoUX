@@ -9,6 +9,20 @@
 // @namespace https://greasyfork.org/users/813029
 // ==/UserScript==
 
+let recordings_number = document.getElementsByClassName("play").length
+let initial_placement = 0
+let new_placement = 0
+
+function highlight_item(movement_value){
+    new_placement += movement_value
+    if ( new_placement >= 0 && new_placement <= recordings_number ) {
+        console.log(new_placement)
+        document.getElementsByClassName("play").item(new_placement).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8"
+    }else {
+        new_placement -= movement_value
+    }
+}
+
 function play_initial_sound(){
     document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByTagName("li").item(0).getElementsByClassName("play").item(0).click()
 }
@@ -54,6 +68,18 @@ function keypressCheck(keypressEvent){
                 break
             case ("Digit4"):
                 play_additional_sound(3)
+                break
+            case ("ArrowUp"):
+                highlight_item(-2)
+                break
+            case ("ArrowDown"):
+                highlight_item(2)
+                break
+            case ("ArrowRight"):
+                highlight_item(1)
+                break
+            case ("ArrowLeft"):
+                highlight_item(-1)
                 break
         }
         (function searchBoxFunctionality(){
