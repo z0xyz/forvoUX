@@ -12,7 +12,7 @@
 let recordings_number = document.getElementsByClassName("play").length
 let initial_placement = 0
 let previous_placement = 0
-let current_placement = 0
+let currentPlacement = 0
 
 function playInitialSound(){
     try {
@@ -25,18 +25,18 @@ function playInitialSound(){
 playInitialSound()
 
 function playSound(){
-    document.getElementsByClassName("play").item(current_placement).click()
+    document.getElementsByClassName("play").item(currentPlacement).click()
 }
 
-function recordingHighlight(movement_value){
-    current_placement += movement_value
-    if ( current_placement >= 0 && current_placement < recordings_number ) {
-        console.log(current_placement)
-        previous_placement = current_placement - movement_value
+function recordingHighlight(movementValue){
+    currentPlacement += movementValue
+    if ( currentPlacement >= 0 && currentPlacement < recordings_number ) {
+        console.log(currentPlacement)
+        previous_placement = currentPlacement - movementValue
         document.getElementsByClassName("play").item(previous_placement).style = ""
-        document.getElementsByClassName("play").item(current_placement).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8"
+        document.getElementsByClassName("play").item(currentPlacement).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8"
     }else {
-        current_placement -= movement_value
+        currentPlacement -= movementValue
     }
 }
 
