@@ -10,6 +10,7 @@
 // ==/UserScript==
 
 let recordingsNumber = document.getElementsByClassName("play").length
+let firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
 let previousPlacement = 0
 let currentPlacement = 0
 
@@ -30,15 +31,21 @@ function playSound(){
 function recordingHighlight(movementValue){
     currentPlacement += movementValue
     previousPlacement = currentPlacement - movementValue
-    //The following 3 conditional statements alters the default received movementValue at certain recording placements , in order to improve usability .
+    //The following 2 if&else if conditional statements alters the default received movementValue at certain recording placements , in order to improve usability .
     //the variable previousPlacement used within them is used to merely reset the currentPlacement back to its value //before the previous movement , 
     //but logically it has nothing to do with previousPlacement in its own right .
-    if ( previousPlacement == 1 && movementValue == -2 ) {
-        currentPlacement = previousPlacement - 1
-    }else if ( previousPlacement == 0 && movementValue == +2 ) {
-        currentPlacement = previousPlacement + 1
-    }else if ( recordingsNumber % 2 == 0 && previousPlacement == recordingsNumber - 2 && movementValue == +2 ){
-        currentPlacement = previousPlacement + 1
+    if ( firstSeparateRecording != 0 ) {
+        if ( previousPlacement == 1 && movementValue == -2 ) {
+            currentPlacement = previousPlacement - 1
+        }else if ( previousPlacement == 0 && movementValue == +2 ) {
+            currentPlacement = previousPlacement + 1
+        }else if ( recordingsNumber % 2 == 0 && previousPlacement == recordingsNumber - 2 && movementValue == +2 ){
+            currentPlacement = previousPlacement + 1
+        }
+    }else if ( firstSeparateRecording == 0 ) {
+        if ( recordingsNumber % 2 != 0 && previousPlacement == recordingsNumber - 2 && movementValue == +2 ){
+            currentPlacement = previousPlacement + 1
+        }
     }
     if ( currentPlacement >= 0 && currentPlacement < recordingsNumber ) {
         document.getElementsByClassName("play").item(previousPlacement).style = ""
