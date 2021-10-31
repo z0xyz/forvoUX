@@ -10,7 +10,6 @@
 // ==/UserScript==
 
 let recordingsNumber = document.getElementsByClassName("play").length
-let initial_placement = 0
 let previousPlacement = 0
 let currentPlacement = 0
 
