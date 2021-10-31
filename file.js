@@ -9,8 +9,8 @@
 // @namespace https://greasyfork.org/users/813029
 // ==/UserScript==
 
-let recordingsNumber = document.getElementsByClassName("play").length
-let firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
+const recordingsNumber = document.getElementsByClassName("play").length
+const firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
 let previousPlacement = 0
 let currentPlacement = 0
 
