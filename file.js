@@ -1,16 +1,21 @@
+
 // ==UserScript==
 // @name         forvo
-// @version      0.5
+// @version      0.6
 // @description  Auto pronounce as soon as the forvo page loads .
 // @author       z0xyz
 // @match        https://*forvo.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @run-at       document-end
-// @namespace https://greasyfork.org/users/813029
+// @namespace    https://greasyfork.org/users/813029
 // ==/UserScript==
 
-const recordingsNumber = document.getElementsByClassName("play").length
-const firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
+try {
+    const recordingsNumber = document.getElementsByClassName("play").length
+    const firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
+}catch {
+    console.log('The document is devoid of recordings!')
+}
 let previousPlacement = 0
 let currentPlacement = 0
 
@@ -18,10 +23,13 @@ function playInitialSound(){
     try {
         document.getElementsByClassName("play").item(0).click()
     }catch {
-        document.getElementById("navLangItem-en").firstElementChild.click()
+        try {
+            document.getElementById("navLangItem-en").firstElementChild.click()
+        }catch {
+            console.log('The document is devoid of recordings!')
+        }
     }
 }
-
 playInitialSound()
 
 function playSound(){
@@ -32,7 +40,7 @@ function recordingHighlight(movementValue){
     currentPlacement += movementValue
     previousPlacement = currentPlacement - movementValue
     //The following 2 if&else if conditional statements alters the default received movementValue at certain recording placements , in order to improve usability .
-    //the variable previousPlacement used within them is used to merely reset the currentPlacement back to its value //before the previous movement , 
+    //the variable previousPlacement used within them is used to merely reset the currentPlacement back to its value //before the previous movement ,
     //but logically it has nothing to do with previousPlacement in its own right .
     if ( firstSeparateRecording != 0 ) {
         if ( previousPlacement == 1 && movementValue == -2 ) {
@@ -76,10 +84,11 @@ function keypressCheck(keypressEvent){
                 break
         }
         (function searchBoxFunctionality(){
-            if (keypressEvent.shiftKey && keypressEvent.code == "KeyQ") {
+            if (keypressEvent.shiftKey && keypressEvent.key == "Q") {
                 document.getElementById("word_search_header").value = ""
                 document.getElementById("word_search_header").focus()
-            }else if (keypressEvent.code == "KeyQ"){
+                console.log('the q key is pressed')
+            }else if (keypressEvent.key == "q"){
                 document.getElementById("word_search_header").focus()
             }
         }())
