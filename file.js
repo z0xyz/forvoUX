@@ -87,7 +87,6 @@ function keypressCheck(keypressEvent){
             if (keypressEvent.shiftKey && keypressEvent.key == "Q") {
                 document.getElementById("word_search_header").value = ""
                 document.getElementById("word_search_header").focus()
-                console.log('the q key is pressed')
             }else if (keypressEvent.key == "q"){
                 document.getElementById("word_search_header").focus()
             }
