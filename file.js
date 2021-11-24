@@ -11,8 +11,8 @@
 // ==/UserScript==
 
 try {
-    const recordingsNumber = document.getElementsByClassName("play").length
-    const firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
+    var recordingsNumber = document.getElementsByClassName("play").length
+    var firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
 }catch {
     console.log('The document is devoid of recordings!')
 }
