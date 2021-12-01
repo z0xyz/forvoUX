@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name         forvo
 // @version      0.6
@@ -12,12 +11,12 @@
 
 try {
     var recordingsNumber = document.getElementsByClassName("play").length
-    var firstSeparateRecording = document.getElementsByClassName("word-play-list-icon-size-l").item(0).getElementsByClassName("play").length
+    var firstSeparateRecording = document.getElementsByClassName("results_match").item(0)
 }catch {
     console.log('The document is devoid of recordings!')
 }
-let previousPlacement = 0
-let currentPlacement = 0
+let previousPlacement
+let currentPlacement
 
 function playInitialSound(){
     try {
@@ -42,7 +41,7 @@ function recordingHighlight(movementValue){
     //The following 2 if&else if conditional statements alters the default received movementValue at certain recording placements , in order to improve usability .
     //the variable previousPlacement used within them is used to merely reset the currentPlacement back to its value //before the previous movement ,
     //but logically it has nothing to do with previousPlacement in its own right .
-    if ( firstSeparateRecording != 0 ) {
+    if ( firstSeparateRecording != null ) {
         if ( previousPlacement == 1 && movementValue == -2 ) {
             currentPlacement = previousPlacement - 1
         }else if ( previousPlacement == 0 && movementValue == +2 ) {
@@ -50,14 +49,20 @@ function recordingHighlight(movementValue){
         }else if ( recordingsNumber % 2 == 0 && previousPlacement == recordingsNumber - 2 && movementValue == +2 ){
             currentPlacement = previousPlacement + 1
         }
-    }else if ( firstSeparateRecording == 0 ) {
+    }else if ( firstSeparateRecording == null ) {
+        if ( recordingsNumber % 2 == 0 && currentPlacement.toString() == NaN.toString() && movementValue == +2 ){
+            previousPlacement = 0
+            currentPlacement = 0
+        }
         if ( recordingsNumber % 2 != 0 && previousPlacement == recordingsNumber - 2 && movementValue == +2 ){
             currentPlacement = previousPlacement + 1
         }
     }
     if ( currentPlacement >= 0 && currentPlacement < recordingsNumber ) {
-        document.getElementsByClassName("play").item(previousPlacement).style = ""
-        document.getElementsByClassName("play").item(currentPlacement).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8"
+        (function highlightElement (){
+            document.getElementsByClassName("play").item(previousPlacement).style = ""
+            document.getElementsByClassName("play").item(currentPlacement).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8"
+        }())
     }else {
         currentPlacement -= movementValue
     }
