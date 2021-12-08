@@ -18,9 +18,10 @@ try {
 let previousPlacement
 let currentPlacement
 
-function playInitialSound(){
+(function playInitialSound(){
     try {
-        document.getElementsByClassName("play").item(0).click()
+        document.getElementsByClassName('play').item(0).click()
+        console.log('playing item(0)\'s sond')
     }catch {
         try {
             document.getElementById("navLangItem-en").firstElementChild.click()
@@ -28,8 +29,7 @@ function playInitialSound(){
             console.log('The document is devoid of recordings!')
         }
     }
-}
-playInitialSound()
+}())
 
 function playSound(){
     document.getElementsByClassName("play").item(currentPlacement).click()
@@ -100,3 +100,12 @@ function keypressCheck(keypressEvent){
 }
 
 window.addEventListener("keydown",keypressCheck,false)
+
+
+//this code for redeeming the instances where there is absolutely no recordings within any english type of pronunciation 
+//it still needs additional code for running the first instance when landing on the new page .
+let currentTabElement = document.getElementsByClassName('active').item(0).textContent.includes('English')
+if (currentTabElement == false){
+    document.getElementsByClassName('navLangItem').item(0).click()
+    window.__uspapi() = undefined
+}
