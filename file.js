@@ -9,15 +9,13 @@
 // @namespace    https://greasyfork.org/users/813029
 // ==/UserScript==
 
-let recordingsLength = document.getElementsByClassName("play").length;
+let recordingsLength = document.getElementsByClassName("play").length
+let separateExactMatching = document.getElementsByClassName("results_match")
 let activeElemenntIndex = 0
 
-try {
-    var firstSeparateRecording = document
-        .getElementsByClassName("results_match")
-        .item(0);
-} catch {
-    console.log("The document is devoid of recordings!");
+// This very part needs some refinement .. a serious one
+if ( separateExactMatching.length == 0 ) {
+	console.log("The document is devoid of recordings!");
 }
 
 (function playInitialSound() {
@@ -73,6 +71,12 @@ function switchToFirstTabularLanguage(){
 }
 
 function highlightRecording(movementValue) {
+	// Two nested functions to mitigate some inconsistency in the case of an additional separate exact match
+	if ( separateExactMatching.length == 1 ){
+		if ( ( ( activeElemenntIndex == 0 )  || ( activeElemenntIndex+movementValue < 0 ) ) &&  ( Math.abs(movementValue) == 2 ) ){
+			movementValue -= movementValue/2
+		}
+	} 
 	activeElemenntIndex += movementValue
 	if ( (activeElemenntIndex < 0) || (activeElemenntIndex > (recordingsLength-1)) ){
 		activeElemenntIndex -= movementValue
