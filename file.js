@@ -121,8 +121,15 @@ function keypressCheck(keypressEvent) {
         })();
     }
 }
-
 window.addEventListener("keydown", keypressCheck, false);
+
+(function removeRecordings(){
+	let pendingRecording = document.getElementsByClassName('record')	
+	while ( pendingRecording.item(0) != null ) {
+		pendingRecording.item(0).parentElement.remove()
+	}
+}())
+
 
 //this code for redeeming the instances where there is absolutely no recordings within any english type of pronunciation
 //it still needs additional code for running the first instance when landing on the new page .
