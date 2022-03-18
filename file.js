@@ -9,17 +9,16 @@
 // @namespace    https://greasyfork.org/users/813029
 // ==/UserScript==
 
+let recordingsLength = document.getElementsByClassName("play").length;
+let activeElemenntIndex = 0
 
 try {
-    var recordingsNumber = document.getElementsByClassName("play").length;
     var firstSeparateRecording = document
         .getElementsByClassName("results_match")
         .item(0);
 } catch {
     console.log("The document is devoid of recordings!");
 }
-let previousPlacement;
-let currentPlacement;
 
 (function playInitialSound() {
 	let availableLanguagesUlItem = document.getElementsByClassName('nav_langs').item(0)
@@ -64,7 +63,7 @@ let currentPlacement;
 })();
 
 function playSound() {
-    document.getElementsByClassName("play").item(currentPlacement).click();
+    document.getElementsByClassName("play").item(activeElemenntIndex).click();
 }
 
 function switchToFirstTabularLanguage(){
@@ -73,52 +72,19 @@ function switchToFirstTabularLanguage(){
 	}
 }
 
+function highlightRecording(movementValue) {
+	activeElemenntIndex += movementValue
+	if ( (activeElemenntIndex < 0) || (activeElemenntIndex > (recordingsLength-1)) ){
+		activeElemenntIndex -= movementValue
+	}else {
+		highlightElement( (activeElemenntIndex-movementValue), activeElemenntIndex)
+		document.getElementsByClassName('play').item(activeElemenntIndex).classList.add('active-element')
+	}
+}
 
-function recordingHighlight(movementValue) {
-    currentPlacement += movementValue;
-    previousPlacement = currentPlacement - movementValue;
-    //The following 2 if&else if conditional statements alters the default received movementValue at certain recording placements , in order to improve usability .
-    //the variable previousPlacement used within them is used to merely reset the currentPlacement back to its value //before the previous movement ,
-    //but logically it has nothing to do with previousPlacement in its own right .
-    if (firstSeparateRecording != null) {
-        if (previousPlacement == 1 && movementValue == -2) {
-            currentPlacement = previousPlacement - 1;
-        } else if (previousPlacement == 0 && movementValue == +2) {
-            currentPlacement = previousPlacement + 1;
-        } else if (
-            recordingsNumber % 2 == 0 &&
-            previousPlacement == recordingsNumber - 2 &&
-            movementValue == +2
-        ) {
-            currentPlacement = previousPlacement + 1;
-        }
-    } else if (firstSeparateRecording == null) {
-        if (
-            recordingsNumber % 2 == 0 &&
-            currentPlacement.toString() == NaN.toString() &&
-            movementValue == +2
-        ) {
-            previousPlacement = 0;
-            currentPlacement = 0;
-        }
-        if (
-            recordingsNumber % 2 != 0 &&
-            previousPlacement == recordingsNumber - 2 &&
-            movementValue == +2
-        ) {
-            currentPlacement = previousPlacement + 1;
-        }
-    }
-    if (currentPlacement >= 0 && currentPlacement < recordingsNumber) {
-        (function highlightElement() {
-            document.getElementsByClassName("play").item(previousPlacement).style =
-                "";
-            document.getElementsByClassName("play").item(currentPlacement).style =
-                "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8";
-        })();
-    } else {
-        currentPlacement -= movementValue;
-    }
+function highlightElement(previousElementIndex, newElementIndex) {
+	document.getElementsByClassName("play").item(previousElementIndex).style = "";
+	document.getElementsByClassName("play").item(newElementIndex).style = "border:solid thin lightblue; border-radius:3px; background-color:#d8d8d8";
 }
 
 function keypressCheck(keypressEvent) {
@@ -129,16 +95,16 @@ function keypressCheck(keypressEvent) {
                 playSound();
                 break;
             case "KeyW":
-                recordingHighlight(-2);
+                highlightRecording(-2);
                 break;
             case "KeyS":
-                recordingHighlight(2);
+                highlightRecording(2);
                 break;
             case "KeyD":
-                recordingHighlight(1);
+                highlightRecording(1);
                 break;
             case "KeyA":
-                recordingHighlight(-1);
+                highlightRecording(-1);
                 break;
         }
         (function searchBoxFunctionality() {
