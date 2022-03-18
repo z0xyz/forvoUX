@@ -11,7 +11,7 @@
 
 let recordingsLength = document.getElementsByClassName("play").length
 let separateExactMatching = document.getElementsByClassName("results_match")
-let activeElemenntIndex = 0
+let activeElementIndex = 0
 
 // This very part needs some refinement .. a serious one
 if ( separateExactMatching.length == 0 ) {
@@ -61,7 +61,7 @@ if ( separateExactMatching.length == 0 ) {
 })();
 
 function playSound() {
-    document.getElementsByClassName("play").item(activeElemenntIndex).click();
+    document.getElementsByClassName("play").item(activeElementIndex).click();
 }
 
 function switchToFirstTabularLanguage(){
@@ -72,17 +72,17 @@ function switchToFirstTabularLanguage(){
 
 function highlightRecording(movementValue) {
 	// Two nested functions to mitigate some inconsistency in the case of an additional separate exact match
-	if ( separateExactMatching.length == 1 ){
-		if ( ( ( activeElemenntIndex == 0 )  || ( activeElemenntIndex+movementValue < 0 ) ) &&  ( Math.abs(movementValue) == 2 ) ){
+	if ( separateExactMatching.item(0).getElementsByTagName('li').length == 1 ){
+		if ( ( ( activeElementIndex == 0 )  || ( activeElementIndex+movementValue < 0 ) ) &&  ( Math.abs(movementValue) == 2 ) ){
 			movementValue -= movementValue/2
 		}
 	} 
-	activeElemenntIndex += movementValue
-	if ( (activeElemenntIndex < 0) || (activeElemenntIndex > (recordingsLength-1)) ){
-		activeElemenntIndex -= movementValue
+	activeElementIndex += movementValue
+	if ( (activeElementIndex < 0) || (activeElementIndex > (recordingsLength-1)) ){
+		activeElementIndex -= movementValue
 	}else {
-		highlightElement( (activeElemenntIndex-movementValue), activeElemenntIndex)
-		document.getElementsByClassName('play').item(activeElemenntIndex).classList.add('active-element')
+		highlightElement( (activeElementIndex-movementValue), activeElementIndex)
+		document.getElementsByClassName('play').item(activeElementIndex).classList.add('active-element')
 	}
 }
 
